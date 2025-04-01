@@ -5,6 +5,7 @@ class HtmlComponent {
     protected array $classes = [];
     protected array $styles = [];
     protected ?string $content = null;
+    protected bool $forceSelfClosing = false;
     protected static array $selfClosingTags = ['input', 'br', 'img', 'hr', 'meta', 'link'];
 
     public function __construct(string $tag) {
@@ -64,7 +65,16 @@ class HtmlComponent {
         return implode(' ', array_map(fn($k, $v) => "$k=\"$v\"", array_keys($attributes), $attributes));
     }
 
+    public function selfClosing(bool $value = true): self {
+        $this->forceSelfClosing = $value;
+        return $this;
+    }
+
     protected function isSelfClosing(): bool {
+        if ($this->forceSelfClosing) {
+            return true;
+        }
+        
         return in_array($this->tag, self::$selfClosingTags, true);
     }
 
