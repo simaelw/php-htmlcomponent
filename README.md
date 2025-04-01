@@ -103,11 +103,11 @@ Example of a form component:
 
 ```php
 $form = HtmlComponent::make('form')
-    ->setAttribute('action', '/submit')
-    ->setAttribute('method', 'POST')
+    ->setAttributes('action', '/submit')
+    ->setAttributes('method', 'POST')
     ->setContent(
-        HtmlComponent::make('input')->setAttribute('type', 'text')->setAttribute('name', 'username'),
-        HtmlComponent::make('input')->setAttribute('type', 'password')->setAttribute('name', 'password')
+        HtmlComponent::make('input')->setAttributes('type', 'text')->setAttributes('name', 'username'),
+        HtmlComponent::make('input')->setAttributes('type', 'password')->setAttributes('name', 'password')
     );
 echo $form->render();
 ```
