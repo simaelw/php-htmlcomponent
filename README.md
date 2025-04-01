@@ -24,22 +24,33 @@ echo $div->render(); // <div></div>
 ### Adding CSS Classes
 ```php
 $div = HtmlComponent::make('div')
-    ->addClass('container', 'shadow');
+    ->addClasses('container', 'shadow');
 echo $div->render(); // <div class="container shadow"></div>
 ```
 ### Setting Attributes
 ```php
 $input = HtmlComponent::make('input')
-    ->setAttribute('type', 'text')
-    ->setAttribute('name', 'username');
+    ->addAttributes('type', 'text')
+    ->addAttributes(['name' => 'username']); //or passing as array
 echo $input->render(); // <input type="text" name="username">
 ```
 ### Adding Inline Styles
 ```php
 $div = HtmlComponent::make('div')
-    ->addStyle('color', 'red')
-    ->addStyle('font-weight', 'bold');
+    ->addStyles('color', 'red')
+    ->addStyles('font-weight', 'bold');
 echo $div->render(); // <div style="color: red; font-weight: bold;"></div>
+```
+### Forcing Self-Closing Tags
+```php
+$div = HtmlComponent::make('div')->selfClosing(true);
+echo $div->render(); // <div></div>
+
+$input = HtmlComponent::make('input')->setAttribute('type', 'text')->selfClosing(true);
+echo $input->render(); // <input type="text">
+
+$custom = HtmlComponent::make('custom')->setContent('Content')->selfClosing(false);
+echo $custom->render(); // <custom>Content</custom>
 ```
 ### Setting Content
 ```php
@@ -52,13 +63,6 @@ You can also pass multiple contents, including other components:
 $span = HtmlComponent::make('span')->setContent('Some text');
 $div = HtmlComponent::make('div')->setContent('Text before ', $span, ' text after.');
 echo $div->render(); // <div>Text before <span>Some text</span> text after.</div>
-```
-### Self-Closing Tags
-```php
-$input = HtmlComponent::make('input')
-    ->setAttribute('type', 'text')
-    ->selfClosing();
-echo $input->render(); // <input type="text" />
 ```
 ### Rendering and Printing
 You can get the HTML output using the `render()` method:
@@ -74,7 +78,7 @@ You can also omit the need to call `render()` or `print()` methods by using the 
 Example:
 ```php
 $div = HtmlComponent::make('div')
-    ->addClass('container')
+    ->addClasses('container')
     ->setContent('Hello, World!');
 
 echo $div; // Automatically calls $div->__toString(), which internally calls render()
@@ -84,8 +88,9 @@ The `__toString()` method is automatically invoked when the object is used in a 
 ## Methods and Functionality
 - `make()`: A static method to create an instance of the component.
 - `addClasses()`: Adds one or more CSS classes to the component.
-- `setAttributes()`: Sets one or more HTML attributes for the component.
+- `addAttributes()`: Sets one or more HTML attributes for the component.
 - `addStyles()`: Adds one or more inline styles to the component.
+- `selfClosing()`: To force the tag to be self-closing or not when necessary.
 - `setContent()`: Sets the content for the component (can be a string or other components).
 - `render()`: Returns the HTML representation of the component as a string.
 - `print()`: Outputs the HTML representation directly to the page.
