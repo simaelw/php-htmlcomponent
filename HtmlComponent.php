@@ -54,6 +54,18 @@ class HtmlComponent {
         return $this;
     }
 
+    public function appendContent(string|self ...$contents): self {
+        $newContent = implode('', array_map(fn($c) => $c instanceof self ? $c->render() : $c, $contents));
+        $this->content .= $newContent;
+        return $this;
+    }
+
+    public function prependContent(string|self ...$contents): self {
+        $newContent = implode('', array_map(fn($c) => $c instanceof self ? $c->render() : $c, $contents));
+        $this->content = $newContent . $this->content;
+        return $this;
+    }    
+
     protected function renderAttributes(): string {
         $attributes = $this->attributes;
         if (!empty($this->classes)) {
