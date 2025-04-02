@@ -119,6 +119,13 @@ $form = HtmlComponent::make('form')
 echo $form->render();
 ```
 
+## New Folders: `helpers/` & `components/` 📂
+
+- **`helpers/`** – Contains helper functions to simplify component instantiation.  
+- **`components/`** – Includes `BaseComponent` and example components like `Button`.  
+
+Documentation updates are **work in progress**, but you can explore these files in the meantime. Stay tuned for more details! 🚀
+
 ## Contributing
 If you would like to contribute to this project, feel free to fork the repository and submit a pull request. If you find any bugs or issues, please report them via the "Issues" section.
 
