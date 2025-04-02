@@ -64,6 +64,11 @@ $span = HtmlComponent::make('span')->setContent('Some text');
 $div = HtmlComponent::make('div')->setContent('Text before ', $span, ' text after.');
 echo $div->render(); // <div>Text before <span>Some text</span> text after.</div>
 ```
+### Appending and Prepending Content
+```php
+$div->appendContent($span)
+    ->prependContent('Text before')
+```
 ### Rendering and Printing
 You can get the HTML output using the `render()` method:
 ```php
@@ -92,6 +97,8 @@ The `__toString()` method is automatically invoked when the object is used in a 
 - `addStyles()`: Adds one or more inline styles to the component.
 - `selfClosing()`: To force the tag to be self-closing or not when necessary.
 - `setContent()`: Sets the content for the component (can be a string or other components).
+- `appendContent()`: Appends the content for the component (can be a string or other components).
+- `prependContent()`: Prepends the content for the component (can be a string or other components).
 - `render()`: Returns the HTML representation of the component as a string.
 - `print()`: Outputs the HTML representation directly to the page.
 
